@@ -3,8 +3,8 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 import { Btn, Label, InputForm, FormData } from './FormContacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selector';
+import { addContact } from 'redux/contacts/operations';
+import { getContacts } from 'redux/contacts/selectors';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

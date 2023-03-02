@@ -1,7 +1,7 @@
 import { Item, List, DataContact, BtnDelete } from './ListContacts.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selector';
-import { deleteContact } from 'redux/operations';
+import { getContacts, getFilter } from 'redux/contacts/selectors';
+import { deleteContact } from 'redux/contacts/operations';
 
 const getFilteredContacts = (contacts, filterValue) => {
   const normalizedFilter = filterValue.toLocaleLowerCase();
