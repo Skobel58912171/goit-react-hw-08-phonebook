@@ -18,10 +18,10 @@ const ListContacts = () => {
 
   return (
     <List>
-      {filteredContacts.map(({ id, name, phone }) => (
+      {filteredContacts.map(({ id, name, number }) => (
         <Item key={id}>
           <DataContact>
-            <span>{name}</span>: <span>{phone}</span>
+            <span>{name}</span>: <span>{number}</span>
           </DataContact>
           <BtnDelete
             type="button"

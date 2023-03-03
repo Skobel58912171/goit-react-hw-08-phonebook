@@ -8,10 +8,10 @@ import { getContacts } from 'redux/contacts/selectors';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  phone: yup.string().min(9).max(12).required(),
+  number: yup.string().min(9).max(13).required(),
 });
 
-const initialValues = { name: '', phone: '' };
+const initialValues = { name: '', number: '' };
 
 export const ErrorText = styled.p`
   font: 0.6em 'typewriter', sans-serif;
@@ -60,8 +60,8 @@ export const FormContacts = () => {
         <Label>
           Number
           <br />
-          <InputForm type="tel" name="phone" placeholder="345-45-45" />
-          <FormError name="phone" component="div" />
+          <InputForm type="tel" name="number" placeholder="+380673454545" />
+          <FormError name="number" component="div" />
         </Label>
         <Btn type="submit">Add contact</Btn>
       </FormData>
