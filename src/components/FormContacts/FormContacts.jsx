@@ -1,14 +1,16 @@
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+// import 'yup-phone';
 import styled from 'styled-components';
-import { Btn, Label, InputForm, FormData } from './FormContacts.styled';
+import { Label, InputForm, FormData } from './FormContacts.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
-import { getContacts } from 'redux/contacts/selectors';
+import { getContacts, getIsLoading } from 'redux/contacts/selectors';
+import { Button } from '@chakra-ui/button';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  number: yup.string().min(9).max(13).required(),
+  number: yup.string().min(13).max(13).required(),
 });
 
 const initialValues = { name: '', number: '' };
@@ -31,11 +33,11 @@ const FormError = ({ name }) => {
 export const FormContacts = () => {
   const dispatch = useDispatch();
 
+  const isLoading = useSelector(getIsLoading);
+
   const allContacts = useSelector(getContacts);
 
   const handleSubmit = (contact, { resetForm }) => {
-    // e.preventDefault();
-
     if (allContacts.some(item => item.name === contact.name)) {
       alert(`Contact ${contact.name} already exist`);
       return;
@@ -63,7 +65,15 @@ export const FormContacts = () => {
           <InputForm type="tel" name="number" placeholder="+380673454545" />
           <FormError name="number" component="div" />
         </Label>
-        <Btn type="submit">Add contact</Btn>
+        {isLoading ? (
+          <Button isLoading colorScheme="blue" variant="solid">
+            Submit
+          </Button>
+        ) : (
+          <Button type="submit" colorScheme="blue" variant="solid">
+            ADD CONTACT
+          </Button>
+        )}
       </FormData>
     </Formik>
   );

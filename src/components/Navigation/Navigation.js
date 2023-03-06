@@ -1,13 +1,23 @@
 import { useAuth } from 'hooks';
-import { NavLink } from 'react-router-dom';
+import { MdOutlineWavingHand } from 'react-icons/md';
+import { Nav, Text, StyledLink } from './Navigation.styled';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
 
   return (
-    <nav>
-      <NavLink to="/">Home</NavLink>
-      {isLoggedIn && <NavLink to="/contacts">Contacts</NavLink>}
-    </nav>
+    <>
+      {isLoggedIn && (
+        <Text>
+          Welcome, {user.name} <MdOutlineWavingHand style={{ marginLeft: 5 }} />
+        </Text>
+      )}
+      <Nav>
+        <StyledLink to="/">Home</StyledLink>
+
+        {isLoggedIn && <StyledLink to="/contacts">Contacts</StyledLink>}
+      </Nav>
+    </>
   );
 };

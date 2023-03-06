@@ -1,7 +1,9 @@
-import { Item, List, DataContact, BtnDelete } from './ListContacts.styled';
+import { List } from './ListContacts.styled';
+import ItemContact from 'components/ItemContact/ItemContact';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'redux/contacts/selectors';
 import { deleteContact } from 'redux/contacts/operations';
+import InputFilter from 'components/InputFilter/InputFilter';
 
 const getFilteredContacts = (contacts, filterValue) => {
   const normalizedFilter = filterValue.toLocaleLowerCase();
@@ -17,23 +19,22 @@ const ListContacts = () => {
   const filteredContacts = getFilteredContacts(contacts, filterValue);
 
   return (
-    <List>
-      {filteredContacts.map(({ id, name, number }) => (
-        <Item key={id}>
-          <DataContact>
-            <span>{name}</span>: <span>{number}</span>
-          </DataContact>
-          <BtnDelete
-            type="button"
+    <>
+      <InputFilter />
+      <List>
+        {filteredContacts.map(({ id, name, number }) => (
+          <ItemContact
+            key={id}
+            id={id}
+            name={name}
+            number={number}
             onClick={() => {
               dispatch(deleteContact(id));
             }}
-          >
-            Delete
-          </BtnDelete>
-        </Item>
-      ))}
-    </List>
+          />
+        ))}
+      </List>
+    </>
   );
 };
 

@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts } from 'redux/contacts/operations';
 import { getIsLoading, getError } from 'redux/contacts/selectors';
 import { FormContacts } from 'components/FormContacts/FormContacts';
-import InputFilter from 'components/InputFilter/InputFilter';
 import ListContacts from 'components/ListContacts/ListContacts';
 import { Loader } from 'components/Loader';
+import { GiBookmarklet } from 'react-icons/gi';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -19,26 +19,45 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        width: '100vh',
-        display: 'block',
+    <>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: 0,
+          marginBottom: 0,
+          marginRight: 'auto',
+          marginLeft: 'auto',
+          maxWidth: 1280,
+          minHeight: 600,
+          fontSize: 45,
+          color: '#010101',
+          paddingBottom: 60,
+        }}
+      >
+        <h1
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginTop: 20,
+            marginBottom: 10,
+            marginRight: 'auto',
+            marginLeft: 'auto',
+            fontWeight: '700',
+          }}
+        >
+          PHONEBOOK
+          <GiBookmarklet style={{ marginLeft: 5 }} />
+        </h1>
+        <FormContacts />
+        <h2 style={{ fontSize: 36 }}>Contacts list</h2>
 
-        paddingLeft: 100,
-
-        fontSize: 24,
-        color: '#010101',
-      }}
-    >
-      <h1>Phonebook</h1>
-
-      <FormContacts />
-      <h2>Contacts</h2>
-      <InputFilter />
-      {isLoading && <Loader />}
-      {error && <b>Something went wrong, please reload the page</b>}
-      <ListContacts />
-    </div>
+        {isLoading && <Loader />}
+        {error && <b>Something went wrong, please reload the page</b>}
+        <ListContacts />
+      </div>
+    </>
   );
 }
